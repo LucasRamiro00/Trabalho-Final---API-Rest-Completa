@@ -16,7 +16,6 @@ Esta é uma API RESTful completa desenvolvida para gerenciar uma biblioteca de j
 - **Validações e Tratamento de Erros:** Status codes adequados (200, 201, 204, 400, 401, 403, 404, 422) e bloqueio de dados incorretos.
 
 ## 📦 Como rodar o projeto localmente
-
-1. Clone este repositório:
-   ```bash
-   git clone <LINK_DO_SEU_REPOSITORIO>
+1. Faça o clone deste repositório no seu computador.
+2. Abra o terminal na pasta do projeto e digite `npm install` para baixar as dependências.
+3. Digite `node index.js` para ligar a API (o banco de dados será criado e populado automaticamente).
