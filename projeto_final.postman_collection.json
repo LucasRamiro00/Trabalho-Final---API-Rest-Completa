@@ -1,0 +1,122 @@
+{
+  "info": {
+    "name": "API Steam - Projeto Final",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "jwt_token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Rota de Login (Gera Token)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();",
+              "if(jsonData.token) {",
+              "    pm.collectionVariables.set('jwt_token', jsonData.token);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"lucas\",\n  \"senha\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/login",
+          "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "login"]
+        }
+      }
+    },
+    {
+      "name": "2. GET - Listar Jogos (Paginado)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/jogos?limit=5&page=1&sort=ano&order=DESC",
+          "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "jogos"],
+          "query": [
+            { "key": "limit", "value": "5" },
+            { "key": "page", "value": "1" },
+            { "key": "sort", "value": "ano" },
+            { "key": "order", "value": "DESC" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "3. POST - Cadastrar Jogo (Protegido)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [ { "key": "token", "value": "{{jwt_token}}", "type": "string" } ]
+        },
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Sekiro: Shadows Die Twice\",\n  \"ano\": 2019,\n  \"genero_id\": 4\n}"
+        },
+        "url": { "raw": "http://localhost:3000/api/jogos", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "jogos"] }
+      }
+    },
+    {
+      "name": "4. PUT - Atualizar Jogo (Protegido)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [ { "key": "token", "value": "{{jwt_token}}", "type": "string" } ]
+        },
+        "method": "PUT",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Counter Strike 2 (Atualizado)\",\n  \"ano\": 2023,\n  \"genero_id\": 6\n}"
+        },
+        "url": { "raw": "http://localhost:3000/api/jogos/16", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "jogos", "16"] }
+      }
+    },
+    {
+      "name": "5. DELETE - Remover Jogo (Protegido)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [ { "key": "token", "value": "{{jwt_token}}", "type": "string" } ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "http://localhost:3000/api/jogos/12", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "jogos", "12"] }
+      }
+    },
+    {
+      "name": "6. TESTE ERRO - Ano Inválido",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [ { "key": "token", "value": "{{jwt_token}}", "type": "string" } ]
+        },
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Jogo do Passado\",\n  \"ano\": 1000,\n  \"genero_id\": 1\n}"
+        },
+        "url": { "raw": "http://localhost:3000/api/jogos", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "jogos"] }
+      }
+    }
+  ]
+}
