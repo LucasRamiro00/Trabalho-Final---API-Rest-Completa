@@ -20,4 +20,4 @@ Esta é uma API RESTful completa desenvolvida para gerenciar uma biblioteca de j
 2. Abra o terminal na pasta do projeto e digite `npm install` para baixar as dependências.
 3. Digite `node index.js` para ligar a API (o banco de dados será criado e populado automaticamente).
 
-🌍 **Link da API Online (Deploy no Render):** [Clica aqui para testar a API](https://render.com/docs/troubleshooting-deploys)
+🌍 **Link da API Online (Deploy no Render):** [Clica aqui para testar a API](https://trabalho-final-api-rest-completa.onrender.com)
